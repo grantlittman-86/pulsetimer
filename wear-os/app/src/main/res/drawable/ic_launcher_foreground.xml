@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer circle (timer ring) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M54,26
+            A28,28 0 1,1 54,82
+            A28,28 0 1,1 54,26Z
+            M54,30
+            A24,24 0 1,0 54,78
+            A24,24 0 1,0 54,30Z"
+        android:fillType="evenOdd" />
+
+    <!-- Top tick mark (12 o'clock) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M52.5,28 L55.5,28 L55.5,34 L52.5,34 Z" />
+
+    <!-- Right tick mark (3 o'clock) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M74,52.5 L80,52.5 L80,55.5 L74,55.5 Z" />
+
+    <!-- Bottom tick mark (6 o'clock) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M52.5,74 L55.5,74 L55.5,80 L52.5,80 Z" />
+
+    <!-- Left tick mark (9 o'clock) -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M28,52.5 L34,52.5 L34,55.5 L28,55.5 Z" />
+
+    <!-- Pulse/heartbeat line through center -->
+    <path
+        android:strokeColor="#FFB74D"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M34,54 L44,54 L47,46 L50,62 L53,42 L56,62 L59,46 L62,54 L74,54"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Small center dot -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M54,54 m-2.5,0 a2.5,2.5 0 1,1 5,0 a2.5,2.5 0 1,1 -5,0" />
+
+</vector>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseTimer — Haptic Presentation Timer for Wear OS</title>
+    <meta name="description" content="PulseTimer turns your Wear OS watch into a discreet presentation coach with customizable haptic and audio cues.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #121925;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .app-icon {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 24px;
+        }
+
+        .app-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.15em;
+            color: #90a4ae;
+            margin-bottom: 32px;
+        }
+
+        .badge-link {
+            display: inline-block;
+        }
+
+        .badge-link img {
+            height: 52px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            color: #4fc3f7;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #b0bec5;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 520px) {
+            .features { grid-template-columns: 1fr; }
+        }
+
+        .feature {
+            background: #1a2332;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #263040;
+        }
+
+        .feature-title {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .feature-desc {
+            color: #90a4ae;
+            font-size: 0.88em;
+            margin: 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #263040;
+        }
+
+        .footer a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer p {
+            font-size: 0.85em;
+            color: #607d8b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="app-icon">
+                <svg viewBox="0 0 108 108" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="54" cy="54" r="28" fill="none" stroke="#4FC3F7" stroke-width="4"/>
+                    <rect x="52.5" y="28" width="3" height="6" fill="#4FC3F7"/>
+                    <rect x="74" y="52.5" width="6" height="3" fill="#4FC3F7"/>
+                    <rect x="52.5" y="74" width="3" height="6" fill="#4FC3F7"/>
+                    <rect x="28" y="52.5" width="6" height="3" fill="#4FC3F7"/>
+                    <polyline points="34,54 44,54 47,46 50,62 53,42 56,62 59,46 62,54 74,54" fill="none" stroke="#FFB74D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="54" cy="54" r="2.5" fill="#FFB74D"/>
+                </svg>
+            </div>
+            <h1>PulseTimer</h1>
+            <p class="tagline">Haptic presentation timer for Wear OS.<br>Stay on pace without looking at your watch.</p>
+            <a class="badge-link" href="https://play.google.com/store/apps/details?id=com.grantlittman.pulsetimer">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+            </a>
+        </div>
+
+        <div class="section">
+            <h2>How it works</h2>
+            <p>Create a timer pattern with milestones at the moments that matter. When a milestone hits, your watch taps your wrist with a distinct vibration. Add repeating interval signals to maintain a steady sense of pacing throughout your presentation, meeting, or workshop.</p>
+        </div>
+
+        <div class="section">
+            <h2>Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-title">Custom haptic patterns</div>
+                    <p class="feature-desc">Create distinct vibration signals for each milestone so you know exactly where you are in your talk.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Audio cues</div>
+                    <p class="feature-desc">Optional audio signals for environments where haptics alone aren't enough.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Live countdown</div>
+                    <p class="feature-desc">See elapsed time, remaining time, and a preview of your next signal at a glance.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Pause and resume</div>
+                    <p class="feature-desc">Pause mid-timer without losing your place if things go off-script.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Presets and custom patterns</div>
+                    <p class="feature-desc">Start with built-in patterns for common meeting lengths or create your own.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Watch face complication</div>
+                    <p class="feature-desc">Add PulseTimer to your watch face for one-tap launch before any meeting.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Background reliable</div>
+                    <p class="feature-desc">Runs accurately through screen timeouts and ambient mode transitions.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-title">Fully private</div>
+                    <p class="feature-desc">No account needed, no internet required, no data collected. Everything stays on your watch.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Built for presenters</h2>
+            <p>Whether you are giving a keynote, running a standup, facilitating a workshop, or leading a board meeting, PulseTimer keeps you in control of your time without being obvious about it. A subtle tap on the wrist is all it takes.</p>
+        </div>
+
+        <div class="footer">
+            <p><a href="privacy-policy.html">Privacy Policy</a></p>
+            <p style="margin-top: 12px;">Made by Grant Littman</p>
+        </div>
+    </div>
+</body>
+</html>

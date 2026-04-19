@@ -1,0 +1,23 @@
+# Build outputs
+wear-os/build/
+wear-os/app/build/
+wear-os/.gradle/
+watchos/build/
+watchos/DerivedData/
+
+# IDE
+.idea/
+*.iml
+*.xcuserdata
+*.xcworkspace/xcuserdata/
+.DS_Store
+
+# Sensitive files
+keystore.properties
+*.jks
+*.keystore
+local.properties
+
+# OS files
+Thumbs.db
+.DS_Store
