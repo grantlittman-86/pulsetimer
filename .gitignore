@@ -18,6 +18,9 @@ keystore.properties
 *.keystore
 local.properties
 
+# Private project context (read locally by Claude surfaces, not published)
+docs/project-context.md
+
 # OS files
 Thumbs.db
 .DS_Store
