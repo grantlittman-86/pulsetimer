@@ -25,3 +25,4 @@ docs/workflow-briefing.md
 # OS files
 Thumbs.db
 .DS_Store
+.claude/
