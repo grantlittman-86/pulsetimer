@@ -1,0 +1,48 @@
+{
+  "source": "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/PatternListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "PulseTimer",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 57
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Pattern",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 26
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 45
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 51
+        }
+      },
+      {
+        "comment": "",
+        "key": "PRESET",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 72
+        }
+      }
+    ]
+  },
+  "version": 1
+}

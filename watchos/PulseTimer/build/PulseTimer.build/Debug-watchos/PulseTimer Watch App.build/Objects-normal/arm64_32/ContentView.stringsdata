@@ -1,0 +1,16 @@
+{
+  "source": "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Pattern not found",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 71
+        }
+      }
+    ]
+  },
+  "version": 1
+}

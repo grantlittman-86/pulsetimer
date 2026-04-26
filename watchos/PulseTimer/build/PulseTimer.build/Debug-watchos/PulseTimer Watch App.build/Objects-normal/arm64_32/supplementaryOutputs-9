@@ -1,0 +1,23 @@
+{
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Utility/TimeFormatting.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/TimeFormatting.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/TimeFormatting.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/TimeFormatting.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/TimeFormatting.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/TimeFormatting.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/DurationPickerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/DurationPickerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/DurationPickerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/DurationPickerView.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/DurationPickerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/DurationPickerView.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/HapticTypePickerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/HapticTypePickerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/HapticTypePickerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/HapticTypePickerView.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/HapticTypePickerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64_32/HapticTypePickerView.swiftdeps"
+  }
+}

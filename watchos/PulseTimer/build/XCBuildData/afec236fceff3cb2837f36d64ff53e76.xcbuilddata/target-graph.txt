@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'PulseTimer Watch App' in project 'PulseTimer'
+➜ Explicit dependency on target 'ComplicationExtension' in project 'PulseTimer'
+Target 'ComplicationExtension' in project 'PulseTimer' (no dependencies)

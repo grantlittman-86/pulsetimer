@@ -1,0 +1,229 @@
+{
+  "" : {
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimer Watch App-primary.dia",
+    "emit-module-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimer Watch App-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimer Watch App-primary-emit-module.dia",
+    "pch" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimer Watch App-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimer Watch App-primary.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/ContentView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Data/DefaultPresets.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DefaultPresets~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Data/PatternRepository.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternRepository~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Models/CountdownWarning.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/CountdownWarning~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Models/Milestone.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Milestone~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Models/Pattern.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Pattern~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Models/RepeatingInterval.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RepeatingInterval~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Models/Signal.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/Signal~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/PulseTimerApp.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PulseTimerApp~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Timer/RuntimeSessionController.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/RuntimeSessionController~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Timer/SignalExecutor.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/SignalExecutor~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Timer/TimerEngine.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerEngine~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Timer/TimerState.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerState~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Utility/HapticDisplay.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticDisplay~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Utility/TimeFormatting.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimeFormatting~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/DurationPickerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/DurationPickerView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/HapticTypePickerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/MilestoneEditorView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/PatternEditorView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/PatternListView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternListView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/TimerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/TimerView~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

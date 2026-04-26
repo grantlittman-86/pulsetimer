@@ -1,0 +1,23 @@
+{
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/HapticTypePickerView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/HapticTypePickerView.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/MilestoneEditorView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/MilestoneEditorView.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/PulseTimer Watch App/Views/PatternEditorView.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.dia",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/PulseTimer Watch App.build/Objects-normal/arm64/PatternEditorView.swiftdeps"
+  }
+}

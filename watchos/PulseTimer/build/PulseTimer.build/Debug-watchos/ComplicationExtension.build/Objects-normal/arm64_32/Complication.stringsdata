@@ -1,0 +1,40 @@
+{
+  "source": "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/Complication/Complication.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "PulseTimer",
+        "location": {
+          "startingColumn": 19,
+          "startingLine": 52
+        }
+      },
+      {
+        "comment": "",
+        "key": "PulseTimer",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 58
+        }
+      },
+      {
+        "comment": "",
+        "key": "PulseTimer",
+        "location": {
+          "startingColumn": 35,
+          "startingLine": 78
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quick launch PulseTimer.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 79
+        }
+      }
+    ]
+  },
+  "version": 1
+}

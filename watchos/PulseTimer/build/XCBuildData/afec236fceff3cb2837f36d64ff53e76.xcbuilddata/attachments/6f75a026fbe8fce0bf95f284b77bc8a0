@@ -1,0 +1,39 @@
+{
+  "" : {
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationExtension-primary.dia",
+    "emit-module-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationExtension-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationExtension-primary-emit-module.dia",
+    "pch" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationExtension-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationExtension-primary.swiftdeps"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/Complication/Complication.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/Complication~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/Complication/ComplicationBundle.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/ComplicationBundle~partial.swiftmodule"
+  },
+  "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/grantlittman/Documents/GitHub/pulsetimer/watchos/PulseTimer/build/PulseTimer.build/Debug-watchos/ComplicationExtension.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

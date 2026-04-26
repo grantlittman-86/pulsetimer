@@ -10,14 +10,20 @@ A haptic and audio feedback timer for smartwatches, built for presenters, facili
 
 ```
 pulsetimer/
-├── docs/                Shared product docs (see below)
-├── wear-os/             Released Kotlin/Compose app (com.grantlittman.pulsetimer)
-├── watchos/             Planned, not yet in repo
-├── site/pulsetimer/     GitHub Pages landing + privacy policy
-└── CLAUDE.md            This file
+├── docs/                       Shared product docs (see below)
+├── wear-os/                    Released Kotlin/Compose app (com.grantlittman.pulsetimer)
+├── watchos/PulseTimer/         Xcode project for the watchOS app
+│   ├── PulseTimer Watch App/   Watch app source (synchronized folder group)
+│   ├── Complication/           Widget extension source (synchronized folder group)
+│   ├── Info.plist              Watch app's plist (explicit, NOT auto-generated)
+│   └── PulseTimer.xcodeproj
+├── site/pulsetimer/            GitHub Pages landing + privacy policy
+└── CLAUDE.md                   This file
 ```
 
 The Wear OS source still lives under package `com.grantlittman.wearapp.*`. Only the Android `applicationId` was renamed to `com.grantlittman.pulsetimer` for the Play Store.
+
+The watchOS app's App Store listing name is **"PulseTimer: Haptic Cues"** (Apple rejected the simpler "PulseTimer" for similarity to an existing app). On-watch display name remains **"PulseTimer"** for brand consistency with Wear OS.
 
 ## Documentation to read
 
@@ -48,6 +54,8 @@ Writing style for any prose Grant may publish or present as his own (social post
 
 ## Build and deploy workflow
 
+### Wear OS
+
 There is **no Gradle wrapper** in this repo. Do not suggest `./gradlew` commands. Builds go through Android Studio:
 
 - Build an APK: Build > Build APK.
@@ -58,7 +66,28 @@ JDK is Android Studio's bundled JBR at `/Applications/Android Studio.app/Content
 
 ADB is wireless to a Pixel Watch 4 (serial `adb-58231WRCVL119E-CpbEDg._adb-tls-connect._tcp`). An emulator (`emulator-5554`) may also be attached. Always target the physical watch with `adb -s <serial>` when running commands.
 
-Three code locations may exist on disk during the monorepo migration:
+### watchOS
+
+Xcode 26.4.1 with watchOS SDK 26.4. Deployment target watchOS 10.0 (lower than the SDK so the Apple Watch SE 2 on watchOS 26.0.2 can run it).
+
+Builds via Xcode UI (Cmd+R) or `xcodebuild`. Schemes are auto-generated; if missing, regenerate via Product → Scheme → Manage Schemes → "Autocreate Schemes Now."
+
+```bash
+# Build for the SE simulator
+xcodebuild -project watchos/PulseTimer/PulseTimer.xcodeproj \
+  -target "PulseTimer Watch App" \
+  -destination "id=E485EDAF-4617-490E-AE67-48004503B068" \
+  -configuration Debug build
+
+# Archive for App Store distribution
+xcodebuild -project watchos/PulseTimer/PulseTimer.xcodeproj \
+  -scheme "PulseTimer Watch App" \
+  -archivePath /tmp/PulseTimer.xcarchive archive
+```
+
+Apple Watch SE 2nd gen is the physical test device, paired via Grant's iPhone 13 mini (iOS 26.1). Both must be on Wi-Fi for development deploys. App Store Connect app record exists. Apple Developer Program membership active. **Read [`watchOS gotchas memory`] before touching the watchOS code** — many subtle traps documented there (asset catalog, hit-testing, deployment targets, WKExtendedRuntimeSession sessions types, etc.).
+
+### Three code locations on disk
 
 - `~/Wear OS Project/`: the Android Studio working copy Grant has used.
 - `~/Documents/GitHub/pulsetimer/`: this monorepo (canonical going forward).
@@ -67,6 +96,8 @@ Three code locations may exist on disk during the monorepo migration:
 When in doubt, this monorepo is canonical.
 
 ## Architecture at a glance
+
+### Wear OS
 
 | Layer | File | Role |
 |---|---|---|
@@ -78,6 +109,20 @@ When in doubt, this monorepo is canonical.
 | Signal output | [`SignalExecutor.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/timer/SignalExecutor.kt) | `VibrationEffect` for haptics, audio playback |
 | Data | [`Pattern.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/data/model/Pattern.kt), [`PatternRepository.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/data/repository/PatternRepository.kt) | Central data model, DataStore + Gson persistence |
 | Complication | [`PulseTimerComplicationService.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/complication/PulseTimerComplicationService.kt) | Watch face complication, `SMALL_IMAGE` type |
+
+### watchOS
+
+| Layer | File | Role |
+|---|---|---|
+| App entry | [`PulseTimerApp.swift`](watchos/PulseTimer/PulseTimer Watch App/PulseTimerApp.swift) | `@main`, wires up `PatternRepository`, `SignalExecutor`, `TimerEngine` via `@State` + `.environment` |
+| Nav | [`ContentView.swift`](watchos/PulseTimer/PulseTimer Watch App/ContentView.swift) | NavigationStack, `AppRoute` enum, routes to TimerView and editor |
+| Screens | [`PatternListView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/PatternListView.swift), [`TimerView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/TimerView.swift), [`PatternEditorView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/PatternEditorView.swift), [`MilestoneEditorView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/MilestoneEditorView.swift) | List, timer, editor, milestone sub-editor |
+| Pickers | [`DurationPickerView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/DurationPickerView.swift), [`HapticTypePickerView.swift`](watchos/PulseTimer/PulseTimer Watch App/Views/HapticTypePickerView.swift) | H:M:S wheel duration picker, haptic type picker |
+| Timer engine | [`TimerEngine.swift`](watchos/PulseTimer/PulseTimer Watch App/Timer/TimerEngine.swift) | `@Observable @MainActor` Task-based tick loop, direct port of Kotlin engine |
+| Runtime session | [`RuntimeSessionController.swift`](watchos/PulseTimer/PulseTimer Watch App/Timer/RuntimeSessionController.swift) | Wraps `WKExtendedRuntimeSession` (mindfulness type, 60-min cap) |
+| Signal output | [`SignalExecutor.swift`](watchos/PulseTimer/PulseTimer Watch App/Timer/SignalExecutor.swift) | `WKHapticType`-based playback (Core Haptics is iOS-only). Audio is stubbed. |
+| Data | [`Pattern.swift`](watchos/PulseTimer/PulseTimer Watch App/Models/Pattern.swift), [`PatternRepository.swift`](watchos/PulseTimer/PulseTimer Watch App/Data/PatternRepository.swift) | Same JSON schema as Wear OS, `Codable` + `UserDefaults` persistence |
+| Complication | [`Complication.swift`](watchos/PulseTimer/Complication/Complication.swift) | WidgetKit static configuration, all complication families, currently uses an SF Symbol stand-in icon |
 
 ## Load-bearing decisions (do not regress)
 
@@ -127,4 +172,8 @@ GitHub Issues is being used for feature planning going forward.
 
 - No data collection, no network, no analytics. See [`site/pulsetimer/privacy-policy.html`](site/pulsetimer/privacy-policy.html).
 - Google Play Developer account is registered and pending Google's verification review.
-- Apple Developer Program is registered for the planned watchOS build.
+- Apple Developer Program is active. App Store Connect app record exists under the name **"PulseTimer: Haptic Cues"**. Bundle IDs registered:
+  - `com.grantlittman.PulseTimer`
+  - `com.grantlittman.PulseTimer.watchkitapp`
+  - `com.grantlittman.PulseTimer.watchkitapp.PulseTimerComplication`
+- Archive validation passes. Two known launch blockers tracked in the project state memory: complication icon (SF Symbol stand-in, not the brand asset) and audio playback (stubbed).
