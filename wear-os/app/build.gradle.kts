@@ -59,12 +59,12 @@ android {
 
 dependencies {
     // Compose BOM — single version source for all Compose libraries
-    val composeBom = platform("androidx.compose:compose-bom:2025.04.00")
+    val composeBom = platform("androidx.compose:compose-bom:2025.06.00")
     implementation(composeBom)
 
     // Wear OS Compose foundation & material
     implementation("androidx.wear.compose:compose-foundation:1.5.0")
-    implementation("androidx.wear.compose:compose-material3:1.0.0-alpha36")
+    implementation("androidx.wear.compose:compose-material3:1.5.0")
     implementation("androidx.wear.compose:compose-navigation:1.5.0")
 
     // Core Compose (pulled via BOM)

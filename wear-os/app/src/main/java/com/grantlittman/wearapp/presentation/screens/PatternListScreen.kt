@@ -12,8 +12,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -22,11 +24,16 @@ import androidx.wear.compose.foundation.lazy.items
 import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.Card
+import androidx.wear.compose.material3.Icon
 import androidx.wear.compose.material3.MaterialTheme
+import androidx.wear.compose.material3.RevealValue
+import androidx.wear.compose.material3.SwipeToReveal
 import androidx.wear.compose.material3.Text
-import androidx.wear.compose.material3.TextButton
+import androidx.wear.compose.material3.rememberRevealState
+import com.grantlittman.wearapp.R
 import com.grantlittman.wearapp.data.model.Pattern
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 /**
  * Home screen showing all saved patterns and presets.
@@ -37,6 +44,7 @@ fun PatternListScreen(
     patternsFlow: Flow<List<Pattern>>,
     onPatternSelected: (Pattern) -> Unit,
     onPatternEdit: (Pattern) -> Unit,
+    onPatternDelete: (Pattern) -> Unit,
     onCreateNew: () -> Unit
 ) {
     val rawPatterns by patternsFlow.collectAsState(initial = emptyList())
@@ -89,10 +97,18 @@ fun PatternListScreen(
             }
         } else {
             items(patterns, key = { it.id }) { pattern ->
+                // Presets cannot be deleted (FR-1.5); pass null to suppress the
+                // Delete action in SwipeToReveal for those rows.
+                val deleteCallback: (() -> Unit)? = if (pattern.isPreset) {
+                    null
+                } else {
+                    { onPatternDelete(pattern) }
+                }
                 PatternCard(
                     pattern = pattern,
                     onStart = { onPatternSelected(pattern) },
-                    onEdit = { onPatternEdit(pattern) }
+                    onEdit = { onPatternEdit(pattern) },
+                    onDelete = deleteCallback
                 )
             }
         }
@@ -108,61 +124,91 @@ fun PatternListScreen(
 private fun PatternCard(
     pattern: Pattern,
     onStart: () -> Unit,
-    onEdit: () -> Unit
+    onEdit: () -> Unit,
+    onDelete: (() -> Unit)?
 ) {
-    Card(
-        onClick = onStart,
+    val revealState = rememberRevealState()
+    val scope = rememberCoroutineScope()
+
+    SwipeToReveal(
+        primaryAction = {
+            PrimaryActionButton(
+                onClick = {
+                    scope.launch { revealState.animateTo(RevealValue.Covered) }
+                    onEdit()
+                },
+                icon = {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_edit),
+                        contentDescription = "Edit"
+                    )
+                },
+                text = { Text("Edit") }
+            )
+        },
+        onSwipePrimaryAction = onEdit,
+        secondaryAction = if (onDelete != null) {
+            {
+                SecondaryActionButton(
+                    onClick = {
+                        scope.launch { revealState.animateTo(RevealValue.Covered) }
+                        onDelete()
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_delete),
+                            contentDescription = "Delete"
+                        )
+                    }
+                )
+            }
+        } else {
+            null
+        },
+        revealState = revealState,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Column(
-            modifier = Modifier.padding(4.dp)
+        Card(
+            onClick = onStart,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            // Top row: name + badges + edit
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+            Column(
+                modifier = Modifier.padding(4.dp)
             ) {
-                // Pattern name (defensive null check — Gson can bypass Kotlin non-null)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    // Pattern name (defensive null check — Gson can bypass Kotlin non-null)
+                    Text(
+                        text = pattern.name ?: "Untitled",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f)
+                    )
+
+                    if (pattern.isPreset) {
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = "PRESET",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.tertiary
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(2.dp))
+
                 Text(
-                    text = pattern.name ?: "Untitled",
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    text = formatPatternSummary(pattern),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
+                    overflow = TextOverflow.Ellipsis
                 )
-
-                // Badges
-                if (pattern.isPreset) {
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        text = "PRESET",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.tertiary
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(4.dp))
-
-                TextButton(onClick = onEdit) {
-                    Text(
-                        text = "Edit",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
             }
-
-            Spacer(modifier = Modifier.height(2.dp))
-
-            // Detail summary — compact single line
-            Text(
-                text = formatPatternSummary(pattern),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
         }
     }
 }

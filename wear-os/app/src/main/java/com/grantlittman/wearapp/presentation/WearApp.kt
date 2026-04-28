@@ -25,6 +25,7 @@ import com.grantlittman.wearapp.presentation.screens.PatternListScreen
 import com.grantlittman.wearapp.presentation.screens.TimerScreen
 import com.grantlittman.wearapp.timer.TimerService
 import kotlinx.coroutines.launch
+import java.util.UUID
 
 /**
  * Root composable that hosts navigation between all screens.
@@ -60,6 +61,11 @@ fun WearApp(
                 onPatternEdit = { pattern ->
                     navController.navigate(Routes.editorEdit(pattern.id)) {
                         launchSingleTop = true
+                    }
+                },
+                onPatternDelete = { pattern ->
+                    coroutineScope.launch {
+                        repository.delete(pattern)
                     }
                 },
                 onCreateNew = {
@@ -133,19 +139,42 @@ fun WearApp(
             }
 
             pattern.value?.let { existingPattern ->
+                // Per requirements FR-1.5, editing a preset must create a copy.
+                // Transform the loaded preset into a working copy before handing it
+                // to the editor; saving will then add a new pattern rather than
+                // overwriting the preset. Mirrors the watchOS routing in ContentView.
+                val isPresetCopy = existingPattern.isPreset
+                val workingPattern = if (isPresetCopy) {
+                    existingPattern.copy(
+                        id = UUID.randomUUID().toString(),
+                        name = "${existingPattern.name} (Custom)",
+                        isPreset = false,
+                        lastUsedAt = null
+                    )
+                } else {
+                    existingPattern
+                }
+
                 PatternEditorScreen(
-                    existingPattern = existingPattern,
+                    existingPattern = workingPattern,
                     onSave = { updatedPattern ->
                         coroutineScope.launch {
                             repository.save(updatedPattern)
                         }
                         navController.popBackStack()
                     },
-                    onDelete = { patternToDelete ->
-                        coroutineScope.launch {
-                            repository.delete(patternToDelete)
+                    // No Delete affordance for a preset-derived working copy: it
+                    // doesn't exist in the repository yet, so deleting would be a
+                    // confusing no-op.
+                    onDelete = if (isPresetCopy) {
+                        null
+                    } else {
+                        { patternToDelete ->
+                            coroutineScope.launch {
+                                repository.delete(patternToDelete)
+                            }
+                            navController.popBackStack()
                         }
-                        navController.popBackStack()
                     },
                     onCancel = {
                         navController.popBackStack()
