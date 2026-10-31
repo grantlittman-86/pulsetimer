@@ -271,9 +271,9 @@ fun PatternEditorScreen(
                         )
                     )
                 },
-                label = { Text("+ Add Milestone") },
+                label = { Text("+ Add Milestone", color = MaterialTheme.colorScheme.onPrimaryContainer) },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 modifier = Modifier.fillMaxWidth()
             )

@@ -59,6 +59,10 @@ class TimerService : Service() {
         val state: StateFlow<TimerState> get() = timerEngine.state
     }
 
+    // Includes paused and completed sessions until the user explicitly stops/dismisses them.
+    var hasSession: Boolean = false
+        private set
+
     private val binder = TimerBinder()
 
     override fun onCreate() {
@@ -92,6 +96,7 @@ class TimerService : Service() {
     // -- Public API for the UI --
 
     fun startTimer(pattern: Pattern) {
+        hasSession = true
         val notificationBuilder = buildNotificationBuilder("Running: ${pattern.name}")
         startForeground(NOTIFICATION_ID, notificationBuilder.build())
         acquireWakeLock()
@@ -136,6 +141,7 @@ class TimerService : Service() {
     }
 
     fun stopTimer() {
+        hasSession = false
         timerEngine.stop()
         releaseWakeLock()
         // Removing the foreground notification also clears the ongoing activity

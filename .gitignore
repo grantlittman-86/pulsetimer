@@ -2,6 +2,7 @@
 wear-os/build/
 wear-os/app/build/
 wear-os/.gradle/
+wear-os/.kotlin/
 watchos/build/
 watchos/DerivedData/
 

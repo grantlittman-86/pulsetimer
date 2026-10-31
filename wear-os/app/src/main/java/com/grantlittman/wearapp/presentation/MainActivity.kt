@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var signalExecutor: SignalExecutor
     private var timerBinder by mutableStateOf<TimerService.TimerBinder?>(null)
     private var serviceBound = false
+    private var foregroundVisit by mutableStateOf(0)
     var isAmbient by mutableStateOf(false)
         private set
 
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             timerBinder = service as? TimerService.TimerBinder
             serviceBound = true
+            restoreTimerDisplay()
 
             // If a pattern was queued before binding completed, start it now
             pendingPattern?.let { pattern ->
@@ -96,6 +98,7 @@ class MainActivity : ComponentActivity() {
                     repository = repository,
                     timerBinder = timerBinder,
                     isAmbient = isAmbient,
+                    foregroundVisit = foregroundVisit,
                     onStartTimer = ::startTimer,
                     onPauseTimer = ::pauseTimer,
                     onResumeTimer = ::resumeTimer,
@@ -108,6 +111,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+        foregroundVisit++
+        restoreTimerDisplay()
         // Only bind (don't start foreground) — the service starts foreground when a timer runs
         if (!serviceBound) {
             val intent = TimerService.startIntent(this)
@@ -135,10 +140,25 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         lifecycle.removeObserver(ambientObserver)
+        // Release the destroyed activity, without stopping the started foreground service.
+        if (serviceBound) {
+            unbindService(serviceConnection)
+            serviceBound = false
+            timerBinder = null
+        }
         super.onDestroy()
     }
 
+    private fun restoreTimerDisplay() {
+        timerBinder?.engine?.isAmbient = isAmbient
+        if (timerBinder?.service?.hasSession == true) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
+
     private fun startTimer(pattern: Pattern) {
+        // Selecting a pattern after returning must not replace an existing session.
+        if (timerBinder?.service?.hasSession == true) return
         lifecycleScope.launch {
             repository.markUsed(pattern.id)
         }
