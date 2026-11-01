@@ -2,6 +2,7 @@ package com.grantlittman.wearapp.presentation.screens
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material3.Button
@@ -84,7 +86,9 @@ private fun AmbientTimerLayout(state: TimerState) {
             style = MaterialTheme.typography.labelMedium,
             color = Color(0xFF999999),
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth(0.75f)
         )
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -224,7 +228,10 @@ private fun InteractiveTimerLayout(
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                maxLines = 1,
+                modifier = Modifier.fillMaxWidth(0.75f).basicMarquee(
+                    iterations = Int.MAX_VALUE
+                )
             )
 
             Spacer(modifier = Modifier.height(2.dp))

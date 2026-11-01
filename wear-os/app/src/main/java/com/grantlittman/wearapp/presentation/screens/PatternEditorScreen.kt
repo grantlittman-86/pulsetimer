@@ -19,6 +19,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.foundation.lazy.ScalingLazyColumn
@@ -26,6 +28,7 @@ import androidx.wear.compose.foundation.lazy.rememberScalingLazyListState
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.ButtonDefaults
 import androidx.wear.compose.material3.Card
+import androidx.wear.compose.material3.FilledTonalIconButton
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.SwitchButton
 import androidx.wear.compose.material3.Text
@@ -271,9 +274,9 @@ fun PatternEditorScreen(
                         )
                     )
                 },
-                label = { Text("+ Add Milestone") },
+                label = { Text("+ Add Milestone", color = MaterialTheme.colorScheme.onPrimaryContainer) },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -515,38 +518,41 @@ private fun MilestoneRow(
                 onTrySignal = onTrySignal
             )
 
-            // Repeat count
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
+            // Keep the label above the controls so neither symbol is squeezed off-screen.
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "Repeat: ${milestone.repeatCount}x",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(end = 8.dp)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Button(
-                    onClick = {
-                        onUpdate(milestone.copy(repeatCount = (milestone.repeatCount - 1).coerceAtLeast(1)))
-                    },
-                    modifier = Modifier.size(24.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                    ),
-                    label = { Text("-") }
-                )
-                Button(
-                    onClick = {
-                        onUpdate(milestone.copy(repeatCount = (milestone.repeatCount + 1).coerceAtMost(5)))
-                    },
-                    modifier = Modifier.size(24.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                    ),
-                    label = { Text("+") }
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    FilledTonalIconButton(
+                        onClick = {
+                            onUpdate(milestone.copy(repeatCount = (milestone.repeatCount - 1).coerceAtLeast(1)))
+                        },
+                        modifier = Modifier.size(40.dp).semantics {
+                            contentDescription = "Decrease haptic repeat count"
+                        }
+                    ) {
+                        Text("−", style = MaterialTheme.typography.titleMedium)
+                    }
+                    FilledTonalIconButton(
+                        onClick = {
+                            onUpdate(milestone.copy(repeatCount = (milestone.repeatCount + 1).coerceAtMost(5)))
+                        },
+                        modifier = Modifier.size(40.dp).semantics {
+                            contentDescription = "Increase haptic repeat count"
+                        }
+                    ) {
+                        Text("+", style = MaterialTheme.typography.titleMedium)
+                    }
+                }
             }
         }
     }

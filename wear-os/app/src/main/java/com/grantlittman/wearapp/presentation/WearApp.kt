@@ -35,6 +35,7 @@ fun WearApp(
     repository: PatternRepository,
     timerBinder: TimerService.TimerBinder?,
     isAmbient: Boolean = false,
+    foregroundVisit: Int = 0,
     onStartTimer: (Pattern) -> Unit,
     onPauseTimer: () -> Unit,
     onResumeTimer: () -> Unit,
@@ -43,6 +44,26 @@ fun WearApp(
 ) {
     val navController = rememberSwipeDismissableNavController()
     val coroutineScope = rememberCoroutineScope()
+
+    // Wait for the service before allowing a new timer to be started. Recreated
+    // activities must reconnect to its existing session, not start from the list.
+    if (timerBinder == null) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("Connecting...", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        return
+    }
+
+    LaunchedEffect(timerBinder, foregroundVisit) {
+        if (timerBinder.service.hasSession &&
+            navController.currentDestination?.route != Routes.TIMER
+        ) {
+            navController.navigate(Routes.TIMER) {
+                popUpTo(Routes.PATTERN_LIST) { inclusive = false }
+                launchSingleTop = true
+            }
+        }
+    }
 
     SwipeDismissableNavHost(
         navController = navController,
@@ -78,32 +99,17 @@ fun WearApp(
 
         // -- Timer --
         composable(Routes.TIMER) {
-            val binder = timerBinder
-            if (binder != null) {
-                TimerScreen(
-                    stateFlow = binder.state,
-                    isAmbient = isAmbient,
-                    onPause = onPauseTimer,
-                    onResume = onResumeTimer,
-                    onStop = {
-                        // Navigate away first so the screen doesn't flash the reset state
-                        navController.popBackStack(Routes.PATTERN_LIST, inclusive = false)
-                        onStopTimer()
-                    }
-                )
-            } else {
-                // Service not yet bound — show loading state
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Starting...",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+            TimerScreen(
+                stateFlow = timerBinder.state,
+                isAmbient = isAmbient,
+                onPause = onPauseTimer,
+                onResume = onResumeTimer,
+                onStop = {
+                    // Preserve the final display during asynchronous navigation.
+                    navController.popBackStack(Routes.PATTERN_LIST, inclusive = false)
+                    onStopTimer()
                 }
-            }
+            )
         }
 
         // -- Editor: New Pattern --

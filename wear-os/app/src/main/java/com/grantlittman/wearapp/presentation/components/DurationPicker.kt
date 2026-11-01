@@ -11,8 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material3.Button
-import androidx.wear.compose.material3.ButtonDefaults
+import androidx.wear.compose.material3.FilledTonalIconButton
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
 
@@ -93,20 +94,14 @@ private fun StepperColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        Button(
+        FilledTonalIconButton(
             onClick = onIncrement,
-            modifier = Modifier.size(28.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-            ),
-            label = {
-                Text(
-                    text = "+",
-                    style = MaterialTheme.typography.labelMedium,
-                    textAlign = TextAlign.Center
-                )
+            modifier = Modifier.size(40.dp).semantics {
+                contentDescription = "Increase ${if (label == "m") "minutes" else "seconds"}"
             }
-        )
+        ) {
+            Text("+", style = MaterialTheme.typography.titleMedium)
+        }
 
         Text(
             text = "%02d%s".format(value, label),
@@ -115,19 +110,13 @@ private fun StepperColumn(
             textAlign = TextAlign.Center
         )
 
-        Button(
+        FilledTonalIconButton(
             onClick = onDecrement,
-            modifier = Modifier.size(28.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-            ),
-            label = {
-                Text(
-                    text = "-",
-                    style = MaterialTheme.typography.labelMedium,
-                    textAlign = TextAlign.Center
-                )
+            modifier = Modifier.size(40.dp).semantics {
+                contentDescription = "Decrease ${if (label == "m") "minutes" else "seconds"}"
             }
-        )
+        ) {
+            Text("−", style = MaterialTheme.typography.titleMedium)
+        }
     }
 }
