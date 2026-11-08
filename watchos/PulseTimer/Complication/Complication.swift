@@ -7,11 +7,8 @@ import SwiftUI
 /// can place on a watch face slot. Tapping it brings up the app, since watchOS
 /// auto-routes complication taps to the parent app for static complications.
 ///
-/// Icon: uses the `waveform.circle` SF Symbol rather than a custom asset. The actual
-/// project asset (`ic_complication.png` from the Wear OS side) refused to load via
-/// asset-catalog lookup in this widget extension despite being correctly bundled —
-/// a known watchOS widget asset quirk. The SF Symbol matches our brand visually
-/// (circle + waveform inside) and renders reliably at all sizes.
+/// The brand mark is drawn with SwiftUI paths, avoiding the asset-catalog lookup
+/// failure previously observed on the physical Watch.
 struct PulseTimerProvider: TimelineProvider {
     func placeholder(in context: Context) -> PulseTimerEntry {
         PulseTimerEntry(date: Date())
@@ -33,37 +30,73 @@ struct PulseTimerEntry: TimelineEntry {
     let date: Date
 }
 
+/// Geometry follows the original 108-unit launcher artwork, cropped to its
+/// 72-unit safe zone. No background is drawn on the watch face.
+private struct PulseTimerMark: View {
+    @Environment(\.widgetRenderingMode) private var renderingMode
+
+    var body: some View {
+        GeometryReader { geometry in
+            let size = min(geometry.size.width, geometry.size.height)
+            let scale = size / 72
+            ZStack {
+                Path { path in
+                    path.addEllipse(in: CGRect(x: 10 * scale, y: 10 * scale,
+                                               width: 52 * scale, height: 52 * scale))
+                }
+                .stroke(renderingMode == .fullColor
+                        ? Color(red: 79/255, green: 195/255, blue: 247/255) : .white,
+                        lineWidth: 4 * scale)
+                Path { path in
+                    for rect in [CGRect(x: 34.5, y: 10, width: 3, height: 6),
+                                 CGRect(x: 56, y: 34.5, width: 6, height: 3),
+                                 CGRect(x: 34.5, y: 56, width: 3, height: 6),
+                                 CGRect(x: 10, y: 34.5, width: 6, height: 3)] {
+                        path.addRect(rect.applying(CGAffineTransform(scaleX: scale, y: scale)))
+                    }
+                }
+                .fill(renderingMode == .fullColor
+                      ? Color(red: 79/255, green: 195/255, blue: 247/255) : .white)
+                Path { path in
+                    let points: [CGPoint] = [CGPoint(x: 16, y: 36), CGPoint(x: 26, y: 36),
+                        CGPoint(x: 29, y: 28), CGPoint(x: 32, y: 44), CGPoint(x: 35, y: 24),
+                        CGPoint(x: 38, y: 44), CGPoint(x: 41, y: 28), CGPoint(x: 44, y: 36),
+                        CGPoint(x: 56, y: 36)]
+                    path.addLines(points.map { CGPoint(x: $0.x * scale, y: $0.y * scale) })
+                }
+                .stroke(renderingMode == .fullColor
+                        ? Color(red: 1, green: 183/255, blue: 77/255) : .white,
+                        style: StrokeStyle(lineWidth: 2.5 * scale, lineCap: .round, lineJoin: .round))
+                .widgetAccentable()
+            }
+            .frame(width: size, height: size)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .accessibilityHidden(true)
+    }
+}
+
 struct PulseTimerComplicationView: View {
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
-        switch family {
-        case .accessoryCircular:
-            Image(systemName: "waveform.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.cyan)
-        case .accessoryCorner:
-            Image(systemName: "waveform.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.cyan)
-        case .accessoryInline:
-            Label("PulseTimer", systemImage: "waveform.circle.fill")
-        case .accessoryRectangular:
-            HStack(spacing: 6) {
-                Image(systemName: "waveform.circle.fill")
-                    .foregroundStyle(.cyan)
-                    .font(.title2)
-                Text("PulseTimer")
-                    .font(.headline)
+        Group {
+            switch family {
+            case .accessoryInline:
+                // Inline slots support text and system-symbol labels reliably.
+                Label("PulseTimer", systemImage: "timer")
+            case .accessoryRectangular:
+                HStack(spacing: 6) {
+                    PulseTimerMark().frame(width: 32, height: 32)
+                    Text("PulseTimer").font(.headline).minimumScaleFactor(0.8).lineLimit(1)
+                }
+            default:
+                PulseTimerMark()
             }
-        @unknown default:
-            Image(systemName: "waveform.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.cyan)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Open PulseTimer")
     }
 }
 
