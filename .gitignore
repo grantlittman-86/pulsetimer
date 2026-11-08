@@ -10,6 +10,7 @@ watchos/DerivedData/
 .idea/
 *.iml
 *.xcuserdata
+*.xcuserstate
 *.xcworkspace/xcuserdata/
 .DS_Store
 
