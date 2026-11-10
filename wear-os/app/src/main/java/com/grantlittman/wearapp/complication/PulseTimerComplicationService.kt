@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.wear.watchface.complications.data.ComplicationData
 import androidx.wear.watchface.complications.data.ComplicationType
+import androidx.wear.watchface.complications.data.MonochromaticImage
+import androidx.wear.watchface.complications.data.MonochromaticImageComplicationData
 import androidx.wear.watchface.complications.data.PlainComplicationText
 import androidx.wear.watchface.complications.data.SmallImage
 import androidx.wear.watchface.complications.data.SmallImageComplicationData
@@ -16,23 +18,25 @@ import com.grantlittman.wearapp.presentation.MainActivity
 
 /**
  * Watch face complication — icon-only quick launch for PulseTimer.
- * Uses SMALL_IMAGE type for full-size icon rendering in the slot.
+ * Keeps SMALL_IMAGE for color slots and supports monochrome icon slots as well.
  */
 class PulseTimerComplicationService : SuspendingComplicationDataSourceService() {
 
     override fun getPreviewData(type: ComplicationType): ComplicationData? {
-        if (type != ComplicationType.SMALL_IMAGE) return null
-        return buildComplication()
+        return buildComplication(type)
     }
 
     override suspend fun onComplicationRequest(
         request: ComplicationRequest
     ): ComplicationData? {
-        if (request.complicationType != ComplicationType.SMALL_IMAGE) return null
-        return buildComplication()
+        return buildComplication(request.complicationType)
     }
 
-    private fun buildComplication(): ComplicationData {
+    private fun buildComplication(type: ComplicationType): ComplicationData? {
+        if (type != ComplicationType.SMALL_IMAGE &&
+            type != ComplicationType.MONOCHROMATIC_IMAGE
+        ) return null
+
         val launchIntent = PendingIntent.getActivity(
             this,
             0,
@@ -44,6 +48,18 @@ class PulseTimerComplicationService : SuspendingComplicationDataSourceService() 
 
         val activeIcon = Icon.createWithResource(this, R.drawable.ic_complication)
         val ambientIcon = Icon.createWithResource(this, R.drawable.ic_complication_ambient)
+
+        if (type == ComplicationType.MONOCHROMATIC_IMAGE) {
+            // Reuse the white transparent artwork so the watch face can tint it.
+            return MonochromaticImageComplicationData.Builder(
+                monochromaticImage = MonochromaticImage.Builder(ambientIcon)
+                    .setAmbientImage(ambientIcon)
+                    .build(),
+                contentDescription = PlainComplicationText.Builder("Open PulseTimer").build()
+            )
+                .setTapAction(launchIntent)
+                .build()
+        }
 
         return SmallImageComplicationData.Builder(
             smallImage = SmallImage.Builder(activeIcon, SmallImageType.ICON)

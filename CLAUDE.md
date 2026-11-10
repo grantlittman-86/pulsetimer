@@ -108,7 +108,7 @@ When in doubt, this monorepo is canonical.
 | Service | [`TimerService.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/timer/TimerService.kt) | Foreground service, OngoingActivity, wake lock |
 | Signal output | [`SignalExecutor.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/timer/SignalExecutor.kt) | `VibrationEffect` for haptics, audio playback |
 | Data | [`Pattern.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/data/model/Pattern.kt), [`PatternRepository.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/data/repository/PatternRepository.kt) | Central data model, DataStore + Gson persistence |
-| Complication | [`PulseTimerComplicationService.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/complication/PulseTimerComplicationService.kt) | Watch face complication, `SMALL_IMAGE` type |
+| Complication | [`PulseTimerComplicationService.kt`](wear-os/app/src/main/java/com/grantlittman/wearapp/complication/PulseTimerComplicationService.kt) | Watch face complication, `SMALL_IMAGE` and `MONOCHROMATIC_IMAGE` types |
 
 ### watchOS
 
@@ -133,7 +133,7 @@ Each of these caused a real debugging session. Flag the history and confirm with
 3. **Gson bypasses Kotlin null safety.** Fields declared non-null in Kotlin data classes can be null at runtime after deserialization. Add defensive null checks in UI code touching `Pattern`, `Signal`, `Milestone`, `RepeatingInterval`, `CountdownWarning`, and `TimerState`.
 4. **R8 / ProGuard is disabled** (`isMinifyEnabled = false, isShrinkResources = false`). Re-enabling caused opaque obfuscated crashes in Compose internals. APK size is not a concern.
 5. **`TimerEngine.stop()` preserves final state.** It does `_state.copy(isRunning = false, ...)`, not `TimerState()`. Resetting causes a visible 0:00 flash during async Compose navigation.
-6. **Complication uses `SMALL_IMAGE` with a 400x400 PNG, cyan-blue baked in, separate white ambient icon via `setAmbientImage()`.** `MONOCHROMATIC_IMAGE` disappears from the picker on Pixel Watch 4 Modular. `SHORT_TEXT` forces unwanted text. Vector drawables and smaller PNGs rendered wrong.
+6. **Preserve the complication's `SMALL_IMAGE` path with a 400x400 PNG, cyan-blue baked in, separate white ambient icon via `setAmbientImage()`.** Additional `MONOCHROMATIC_IMAGE` support uses the white PNG for compatible slots (manifest type `ICON`), but must not replace SMALL_IMAGE: monochrome-only support disappeared from the picker on Pixel Watch 4 Modular. `SHORT_TEXT` forces unwanted text. Vector drawables and smaller PNGs rendered wrong.
 
 ## Open questions to verify before claiming a feature works
 
