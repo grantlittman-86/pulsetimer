@@ -60,6 +60,7 @@ class TimerEngine(
             isPaused = false,
             elapsedMillis = 0L,
             totalDurationMillis = pattern.totalDurationMillis,
+            patternId = pattern.id,
             patternName = pattern.name,
             nextMilestone = findNextMilestone(0L, pattern.milestones)
         )
@@ -94,7 +95,7 @@ class TimerEngine(
         tickJob = null
         signalExecutor.cancel()
         pattern = null
-        _state.value = _state.value.copy(isRunning = false, isPaused = false)
+        _state.value = _state.value.copy(isRunning = false, isPaused = false, patternId = null)
     }
 
     private fun startTicking() {

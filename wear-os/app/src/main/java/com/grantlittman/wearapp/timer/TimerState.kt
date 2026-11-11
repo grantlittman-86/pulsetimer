@@ -18,6 +18,9 @@ data class TimerState(
     /** Total duration of the pattern in milliseconds, or null if indefinite. */
     val totalDurationMillis: Long? = null,
 
+    /** Identity of the session, retained through completion until Stop or Done. */
+    val patternId: String? = null,
+
     /** The name of the active pattern. */
     val patternName: String = "",
 

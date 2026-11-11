@@ -1,5 +1,6 @@
 package com.grantlittman.wearapp.presentation.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -32,6 +37,8 @@ import androidx.wear.compose.material3.Text
 import androidx.wear.compose.material3.rememberRevealState
 import com.grantlittman.wearapp.R
 import com.grantlittman.wearapp.data.model.Pattern
+import com.grantlittman.wearapp.timer.TimerState
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -42,6 +49,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun PatternListScreen(
     patternsFlow: Flow<List<Pattern>>,
+    timerStateFlow: StateFlow<TimerState>,
+    onOpenTimer: () -> Unit,
     onPatternSelected: (Pattern) -> Unit,
     onPatternEdit: (Pattern) -> Unit,
     onPatternDelete: (Pattern) -> Unit,
@@ -49,6 +58,13 @@ fun PatternListScreen(
 ) {
     val rawPatterns by patternsFlow.collectAsState(initial = emptyList())
     val listState = rememberScalingLazyListState()
+    val timerState by timerStateFlow.collectAsState()
+    val hasSession = timerState.patternId != null
+    val sessionStatus = when {
+        timerState.isFinished -> "Completed"
+        timerState.isPaused -> "Paused"
+        else -> "Running"
+    }
 
     // Sort: recently used first, then presets, then by name
     val patterns = rawPatterns.sortedWith(
@@ -74,6 +90,29 @@ fun PatternListScreen(
                     .fillMaxWidth()
                     .padding(top = 24.dp, bottom = 4.dp)
             )
+        }
+
+        if (hasSession) {
+            item {
+                Button(
+                    onClick = onOpenTimer,
+                    label = { Text("View timer") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            item {
+                Text(
+                    text = if (timerState.isFinished) {
+                        "Tap Done on the timer to start another pattern."
+                    } else {
+                        "Stop the current timer to start another pattern."
+                    },
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
+                )
+            }
         }
 
         // Create new button
@@ -106,6 +145,8 @@ fun PatternListScreen(
                 }
                 PatternCard(
                     pattern = pattern,
+                    sessionStatus = sessionStatus.takeIf { timerState.patternId == pattern.id },
+                    canStart = !hasSession || timerState.patternId == pattern.id,
                     onStart = { onPatternSelected(pattern) },
                     onEdit = { onPatternEdit(pattern) },
                     onDelete = deleteCallback
@@ -123,6 +164,8 @@ fun PatternListScreen(
 @Composable
 private fun PatternCard(
     pattern: Pattern,
+    sessionStatus: String?,
+    canStart: Boolean,
     onStart: () -> Unit,
     onEdit: () -> Unit,
     onDelete: (() -> Unit)?
@@ -170,11 +213,30 @@ private fun PatternCard(
     ) {
         Card(
             onClick = onStart,
+            enabled = canStart,
+            border = if (sessionStatus != null) {
+                BorderStroke(2.dp, MaterialTheme.colorScheme.primary)
+            } else null,
             modifier = Modifier.fillMaxWidth()
+                .alpha(if (canStart) 1f else 0.45f)
+                .semantics {
+                    selected = sessionStatus != null
+                    stateDescription = sessionStatus ?: if (!canStart) {
+                        "Stop or dismiss the current timer to start this pattern"
+                    } else "Ready"
+                }
         ) {
             Column(
                 modifier = Modifier.padding(4.dp)
             ) {
+                if (sessionStatus != null) {
+                    Text(
+                        text = sessionStatus,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()

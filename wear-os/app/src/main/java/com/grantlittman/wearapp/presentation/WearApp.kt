@@ -73,7 +73,15 @@ fun WearApp(
         composable(Routes.PATTERN_LIST) {
             PatternListScreen(
                 patternsFlow = repository.allPatterns,
+                timerStateFlow = timerBinder.state,
+                onOpenTimer = {
+                    navController.navigate(Routes.TIMER) { launchSingleTop = true }
+                },
                 onPatternSelected = { pattern ->
+                    // Recheck the live session before navigating, not just the row's UI state.
+                    if (timerBinder.service.hasSession &&
+                        timerBinder.state.value.patternId != pattern.id
+                    ) return@PatternListScreen
                     onStartTimer(pattern)
                     navController.navigate(Routes.TIMER) {
                         launchSingleTop = true

@@ -58,6 +58,12 @@ When the timer finishes and the user taps "Done," the app navigates back to the 
 
 Patterns are sorted by most recently used first, then presets, then alphabetical. This puts the pattern you're most likely to use next at the top of the list, which matters on a small watch screen where scrolling is cumbersome.
 
+### Wear OS Active Pattern Selection
+
+The list highlights the current session by pattern ID, with a Running, Paused, or Completed label and an outline. Other patterns remain visible but cannot start until the user stops or dismisses the current session. A View timer button provides a way back even if the underlying saved pattern was renamed or deleted. This makes the existing single-session safeguard explicit instead of silently opening an unrelated timer when another pattern is tapped. Editing and creating patterns remain available. The session ID clears on Stop/Done while final timer display values remain intact.
+
+Validation: On November 11, 2026, Grant verified all six checks on Pixel Watch 4: running highlight, disabled other patterns without interrupting the session, View timer navigation, paused status, re-enabling patterns after Stop, and starting a different pattern. The list appearance was approved. Debug and signed release builds, Android lint, and whitespace checks passed.
+
 ### Minimal Complication Design
 
 The watch face complication shows only the app icon with no text. This matches user expectations for a utility complication and avoids the visual clutter of a label on a small watch face.
