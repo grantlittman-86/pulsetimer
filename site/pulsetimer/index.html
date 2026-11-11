@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PulseTimer — Haptic Presentation Timer for Wear OS</title>
-    <meta name="description" content="PulseTimer turns your Wear OS watch into a discreet presentation coach with customizable haptic and audio cues.">
+    <title>PulseTimer | Haptic Timer for Apple Watch and Wear OS</title>
+    <meta name="description" content="Stay on pace with discreet haptic cues on Apple Watch (watchOS) and Wear OS. Available on the App Store for Apple Watch; Wear OS is in closed testing.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -29,7 +29,7 @@
         .app-icon {
             width: 96px;
             height: 96px;
-            margin-bottom: 24px;
+            margin: 0 auto 24px;
         }
 
         .app-icon svg {
@@ -50,13 +50,33 @@
             margin-bottom: 32px;
         }
 
-        .badge-link {
-            display: inline-block;
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            text-align: left;
         }
 
-        .badge-link img {
-            height: 52px;
+        .platform {
+            background: #1a2332;
+            border: 1px solid #263040;
+            border-radius: 12px;
+            padding: 20px;
         }
+
+        .platform h2 { margin-bottom: 8px; }
+        .platform p { font-size: 0.95em; }
+        .store-link {
+            display: inline-block;
+            color: #121925;
+            background: #4fc3f7;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .store-link:hover { background: #81d4fa; }
+        .store-link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 
         .section {
             margin-bottom: 48px;
@@ -142,15 +162,24 @@
                 </svg>
             </div>
             <h1>PulseTimer</h1>
-            <p class="tagline">Haptic presentation timer for Wear OS.<br>Stay on pace without looking at your watch.</p>
-            <a class="badge-link" href="https://play.google.com/store/apps/details?id=com.grantlittman.pulsetimer">
-                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
-            </a>
+            <p class="tagline">Haptic presentation timer for Apple Watch and Wear OS.<br>Stay on pace without looking at your watch.</p>
+            <div class="platforms">
+                <div class="platform">
+                    <h2>Apple Watch</h2>
+                    <p>Available now for watchOS. Get PulseTimer: Haptic Cues on the App Store.</p>
+                    <a class="store-link" href="https://apps.apple.com/us/app/pulsetimer-haptic-cues/id6763947447?platform=watch">View on the App Store</a>
+                </div>
+                <div class="platform">
+                    <h2>Wear OS</h2>
+                    <p>Currently in closed testing on Google Play. Installation is available to enrolled testers.</p>
+                    <a class="store-link" href="https://play.google.com/apps/testing/com.grantlittman.pulsetimer">Google Play testing access</a>
+                </div>
+            </div>
         </div>
 
         <div class="section">
             <h2>How it works</h2>
-            <p>Create a timer pattern with milestones at the moments that matter. When a milestone hits, your watch taps your wrist with a distinct vibration. Add repeating interval signals to maintain a steady sense of pacing throughout your presentation, meeting, or workshop.</p>
+            <p>On Apple Watch or a Wear OS watch, create a timer pattern with milestones at the moments that matter. When a milestone hits, your watch taps your wrist with a distinct vibration. Add repeating interval signals to maintain a steady sense of pacing throughout your presentation, meeting, or workshop.</p>
         </div>
 
         <div class="section">
@@ -162,7 +191,7 @@
                 </div>
                 <div class="feature">
                     <div class="feature-title">Audio cues</div>
-                    <p class="feature-desc">Optional audio signals for environments where haptics alone aren't enough.</p>
+                    <p class="feature-desc">Optional audio signals on Wear OS for environments where haptics alone aren't enough.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-title">Live countdown</div>
@@ -181,8 +210,8 @@
                     <p class="feature-desc">Add PulseTimer to your watch face for one-tap launch before any meeting.</p>
                 </div>
                 <div class="feature">
-                    <div class="feature-title">Background reliable</div>
-                    <p class="feature-desc">Runs accurately through screen timeouts and ambient mode transitions.</p>
+                    <div class="feature-title">Timing from your wrist</div>
+                    <p class="feature-desc">Follow your session with timed haptic cues on Apple Watch and Wear OS.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-title">Fully private</div>
