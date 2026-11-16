@@ -1,12 +1,15 @@
 package com.grantlittman.wearapp.timer
 
 import android.content.Context
+import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.ToneGenerator
 import android.os.Build
+import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.util.Log
 import com.grantlittman.wearapp.data.model.AudioType
 import com.grantlittman.wearapp.data.model.HapticType
 import com.grantlittman.wearapp.data.model.Signal
@@ -19,6 +22,24 @@ import kotlinx.coroutines.delay
  * to a ToneGenerator tone.
  */
 class SignalExecutor(context: Context) {
+
+    private val audioManager = context.getSystemService(AudioManager::class.java)
+    private val alarmAudioAttributes = AudioAttributes.Builder()
+        .setUsage(AudioAttributes.USAGE_ALARM)
+        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+        .build()
+
+    // Background vibration must declare its purpose. Unclassified effects can be
+    // suppressed by watch firmware or treated as disabled touch feedback.
+    private fun vibrateAlarm(effect: VibrationEffect) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            vibrator.vibrate(effect, VibrationAttributes.Builder()
+                .setUsage(VibrationAttributes.USAGE_ALARM).build())
+        } else {
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(effect, alarmAudioAttributes)
+        }
+    }
 
     private val vibrator: Vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val manager = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
@@ -59,17 +80,17 @@ class SignalExecutor(context: Context) {
         when (type) {
             HapticType.TAP -> {
                 val effect = VibrationEffect.createOneShot(50L, amplitude)
-                vibrator.vibrate(effect)
+                vibrateAlarm(effect)
             }
 
             HapticType.BUZZ -> {
                 val effect = VibrationEffect.createOneShot(200L, amplitude)
-                vibrator.vibrate(effect)
+                vibrateAlarm(effect)
             }
 
             HapticType.PULSE -> {
                 val effect = VibrationEffect.createOneShot(500L, amplitude)
-                vibrator.vibrate(effect)
+                vibrateAlarm(effect)
             }
 
             HapticType.DOUBLE_TAP -> {
@@ -77,7 +98,7 @@ class SignalExecutor(context: Context) {
                 val timings = longArrayOf(0, 50, 100, 50)
                 val amplitudes = intArrayOf(0, amplitude, 0, amplitude)
                 val effect = VibrationEffect.createWaveform(timings, amplitudes, -1)
-                vibrator.vibrate(effect)
+                vibrateAlarm(effect)
             }
         }
     }
@@ -104,15 +125,23 @@ class SignalExecutor(context: Context) {
                 AudioManager.STREAM_ALARM,
                 ToneGenerator.MAX_VOLUME / 2
             )
-            toneGenerator.startTone(toneType, 150)
+            val started = toneGenerator.startTone(toneType, 150)
+            Log.d("PulseTimerSignal", "Audio started=$started alarmVolume=" +
+                audioManager.getStreamVolume(AudioManager.STREAM_ALARM) +
+                " ringerMode=" + audioManager.ringerMode)
+            if (!started) {
+                toneGenerator.release()
+                Log.w("PulseTimerSignal", "ToneGenerator rejected timer cue")
+                return
+            }
             // ToneGenerator holds native audio handles — must release after tone plays.
             // Post release on a background thread after the tone duration.
             Thread {
                 Thread.sleep(200L) // slightly longer than tone duration
                 toneGenerator.release()
             }.start()
-        } catch (_: Exception) {
-            // Audio may not be available — haptic is the priority, so fail silently
+        } catch (error: Exception) {
+            Log.w("PulseTimerSignal", "Unable to play timer audio", error)
         }
     }
 

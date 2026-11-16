@@ -6,6 +6,7 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -218,7 +219,7 @@ private fun InteractiveTimerLayout(
         contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 20.dp),
+            modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -331,39 +332,42 @@ private fun InteractiveTimerLayout(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Controls
+            // Inset controls to keep their lower corners inside the round display.
+            // Equal widths keep Resume from pushing Stop onto a second line.
             Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (state.isFinished) {
                     Button(
                         onClick = onStop,
-                        label = { Text("Done") }
+                        modifier = Modifier.weight(1f),
+                        label = { Text("Done", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, maxLines = 1) }
                     )
-                } else if (state.isPaused) {
+                } else if (state.isPaused || state.isRunning) {
                     Button(
-                        onClick = onResume,
-                        label = { Text("Resume") }
+                        onClick = if (state.isPaused) onResume else onPause,
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
+                        label = {
+                            Text(
+                                if (state.isPaused) "Resume" else "Pause",
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Center,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
                     )
                     Button(
                         onClick = onStop,
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.error
                         ),
-                        label = { Text("Stop") }
-                    )
-                } else if (state.isRunning) {
-                    Button(
-                        onClick = onPause,
-                        label = { Text("Pause") }
-                    )
-                    Button(
-                        onClick = onStop,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.error
-                        ),
-                        label = { Text("Stop") }
+                        label = { Text("Stop", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, maxLines = 1, overflow = TextOverflow.Ellipsis) }
                     )
                 }
             }

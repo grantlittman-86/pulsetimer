@@ -88,13 +88,14 @@ fun WearApp(
                     }
                 },
                 onPatternEdit = { pattern ->
+                    if (timerBinder.state.value.patternId == pattern.id) return@PatternListScreen
                     navController.navigate(Routes.editorEdit(pattern.id)) {
                         launchSingleTop = true
                     }
                 },
                 onPatternDelete = { pattern ->
                     coroutineScope.launch {
-                        repository.delete(pattern)
+                        if (timerBinder.state.value.patternId != pattern.id) repository.delete(pattern)
                     }
                 },
                 onCreateNew = {

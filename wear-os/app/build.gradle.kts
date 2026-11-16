@@ -20,8 +20,8 @@ android {
         applicationId = "com.grantlittman.pulsetimer"
         minSdk = 30
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.0.5"
+        versionCode = 8
+        versionName = "1.0.6"
     }
 
     signingConfigs {

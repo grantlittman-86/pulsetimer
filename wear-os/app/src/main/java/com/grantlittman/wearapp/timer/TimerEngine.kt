@@ -1,5 +1,7 @@
 package com.grantlittman.wearapp.timer
 
+import android.os.SystemClock
+import android.util.Log
 import com.grantlittman.wearapp.data.model.HapticType
 import com.grantlittman.wearapp.data.model.Milestone
 import com.grantlittman.wearapp.data.model.Pattern
@@ -101,14 +103,18 @@ class TimerEngine(
     private fun startTicking() {
         tickJob?.cancel()
         tickJob = scope.launch {
-            var lastTickTime = System.currentTimeMillis()
+            var lastTickTime = SystemClock.elapsedRealtime()
 
             while (isActive) {
                 delay(if (isAmbient) TICK_SLOW_MS else TICK_FAST_MS)
 
-                val now = System.currentTimeMillis()
+                val now = SystemClock.elapsedRealtime()
                 val delta = now - lastTickTime
                 lastTickTime = now
+                if (delta > 2_000L) {
+                    // Local diagnostic: distinguishes delayed execution from suppressed output.
+                    Log.w("PulseTimerEngine", "Timer tick delayed by ${delta}ms; ambient=$isAmbient")
+                }
 
                 val currentState = _state.value
                 val newElapsed = currentState.elapsedMillis + delta

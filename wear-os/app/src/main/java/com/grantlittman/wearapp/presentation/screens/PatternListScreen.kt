@@ -103,9 +103,9 @@ fun PatternListScreen(
             item {
                 Text(
                     text = if (timerState.isFinished) {
-                        "Tap Done on the timer to start another pattern."
+                        "Tap Done to switch patterns or edit/delete the active one."
                     } else {
-                        "Stop the current timer to start another pattern."
+                        "Stop the timer to switch patterns or edit/delete the active one."
                     },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -173,44 +173,7 @@ private fun PatternCard(
     val revealState = rememberRevealState()
     val scope = rememberCoroutineScope()
 
-    SwipeToReveal(
-        primaryAction = {
-            PrimaryActionButton(
-                onClick = {
-                    scope.launch { revealState.animateTo(RevealValue.Covered) }
-                    onEdit()
-                },
-                icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_edit),
-                        contentDescription = "Edit"
-                    )
-                },
-                text = { Text("Edit") }
-            )
-        },
-        onSwipePrimaryAction = onEdit,
-        secondaryAction = if (onDelete != null) {
-            {
-                SecondaryActionButton(
-                    onClick = {
-                        scope.launch { revealState.animateTo(RevealValue.Covered) }
-                        onDelete()
-                    },
-                    icon = {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_delete),
-                            contentDescription = "Delete"
-                        )
-                    }
-                )
-            }
-        } else {
-            null
-        },
-        revealState = revealState,
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    val cardContent: @Composable () -> Unit = {
         Card(
             onClick = onStart,
             enabled = canStart,
@@ -271,6 +234,52 @@ private fun PatternCard(
                     overflow = TextOverflow.Ellipsis
                 )
             }
+        }
+    }
+
+    // A session uses a snapshot. Do not offer mutations that cannot affect it.
+    if (sessionStatus != null) {
+        cardContent()
+    } else {
+        SwipeToReveal(
+            primaryAction = {
+                PrimaryActionButton(
+                    onClick = {
+                        scope.launch { revealState.animateTo(RevealValue.Covered) }
+                        onEdit()
+                    },
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_edit),
+                            contentDescription = "Edit"
+                        )
+                    },
+                    text = { Text("Edit") }
+                )
+            },
+            onSwipePrimaryAction = onEdit,
+            secondaryAction = if (onDelete != null) {
+                {
+                    SecondaryActionButton(
+                        onClick = {
+                            scope.launch { revealState.animateTo(RevealValue.Covered) }
+                            onDelete()
+                        },
+                        icon = {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_delete),
+                                contentDescription = "Delete"
+                            )
+                        }
+                    )
+                }
+            } else {
+                null
+            },
+            revealState = revealState,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            cardContent()
         }
     }
 }
