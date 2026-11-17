@@ -19,7 +19,7 @@ final class TimerEngine {
     var isAmbient: Bool = false
 
     private let signalExecutor: SignalExecutor
-    private let runtimeController = RuntimeSessionController()
+    private let runtimeController: RuntimeSessionController
     private var tickTask: Task<Void, Never>?
     private var pattern: Pattern?
     private var segmentStartedAt: ContinuousClock.Instant?
@@ -29,8 +29,12 @@ final class TimerEngine {
     private var firedMilestoneTriggers: Set<Int64> = []
     private var lastCountdownFiredAt: Int64 = 0
 
-    init(signalExecutor: SignalExecutor) {
+    init(signalExecutor: SignalExecutor, runtimeController: RuntimeSessionController? = nil) {
         self.signalExecutor = signalExecutor
+        self.runtimeController = runtimeController ?? RuntimeSessionController()
+        self.runtimeController.interrupted = { [weak self] message in
+            self?.interrupt(message: message)
+        }
         // When the system is about to end the extended runtime session, fire a strong
         // warning haptic so the user knows the timer is about to stop tracking.
         self.runtimeController.willExpire = { [weak self] in
@@ -79,6 +83,8 @@ final class TimerEngine {
         guard state.isPaused, state.patternId != nil else { return }
         state.isRunning = true
         state.isPaused = false
+        state.interruptionMessage = nil
+        runtimeController.start()
         startTicking()
     }
 
@@ -91,9 +97,22 @@ final class TimerEngine {
         runtimeController.stop()
         pattern = nil
         segmentStartedAt = nil
+        state.interruptionMessage = nil
         state.patternId = nil
         state.isRunning = false
         state.isPaused = false
+    }
+
+    /// Freeze at the last delivered tick. Never replay cues from a suspended period.
+    private func interrupt(message: String) {
+        guard state.patternId != nil, !state.isFinished else { return }
+        tickTask?.cancel()
+        tickTask = nil
+        segmentStartedAt = nil
+        signalExecutor.cancel()
+        state.isRunning = false
+        state.isPaused = true
+        state.interruptionMessage = message
     }
 
     private func startTicking() {
@@ -117,10 +136,18 @@ final class TimerEngine {
 
     private func updateElapsedTime() {
         guard state.isRunning, let start = segmentStartedAt else { return }
+        guard runtimeController.canContinue else {
+            interrupt(message: "The watch interrupted this session. Keep PulseTimer open and tap Resume when ready.")
+            return
+        }
         let duration = start.duration(to: ContinuousClock.now).components
         // Measure from a fixed anchor so fractional milliseconds do not drift.
         let elapsed = duration.seconds * 1_000 + duration.attoseconds / 1_000_000_000_000_000
         let delta = max(0, segmentElapsedMillis + elapsed - state.elapsedMillis)
+        guard delta <= 2_000 else {
+            interrupt(message: "Timing was interrupted. The timer paused rather than playing late cues. Tap Resume when ready.")
+            return
+        }
         tick(delta: delta)
     }
 

@@ -94,6 +94,15 @@ struct TimerView: View {
                     .foregroundStyle(.red)
             }
 
+            if let message = state.interruptionMessage {
+                Text("Timer paused")
+                    .font(.headline)
+                    .foregroundStyle(.orange)
+                Text(message)
+                    .font(.caption2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             controls(state)
                 .padding(.top, 4)
         }

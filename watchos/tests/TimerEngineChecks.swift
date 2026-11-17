@@ -8,14 +8,18 @@ import Foundation
 }
 @MainActor final class RuntimeSessionController {
     var willExpire: (() -> Void)?
-    func start() {}
-    func stop() {}
+    var interrupted: ((String) -> Void)?
+    var canContinue = false
+    var starts = 0
+    func start() { canContinue = true; starts += 1 }
+    func stop() { canContinue = false }
 }
 
 @main struct TimerEngineChecks {
     @MainActor static func main() async throws {
         let signals = SignalExecutor()
-        let engine = TimerEngine(signalExecutor: signals)
+        let runtime = RuntimeSessionController()
+        let engine = TimerEngine(signalExecutor: signals, runtimeController: runtime)
         let first = Pattern(name: "First", repeatingInterval: RepeatingInterval(intervalMillis: 100, signal: Signal()))
         let second = Pattern(name: "Second", totalDurationMillis: 200,
                              repeatingInterval: RepeatingInterval(intervalMillis: 100, signal: Signal()))
@@ -49,6 +53,39 @@ import Foundation
         precondition(engine.state.patternId == first.id && !engine.state.isFinished)
         engine.stop()
         precondition(signals.signals > 0)
-        print("PASS: session protection, pause/resume timing, completion, Stop/Done identity, and restart")
+
+        engine.start(pattern: first)
+        try await Task.sleep(for: .milliseconds(150))
+        let beforeInterruption = engine.state.elapsedMillis
+        let beforeSignals = signals.signals
+        runtime.canContinue = false
+        runtime.interrupted?("Left app")
+        try await Task.sleep(for: .milliseconds(250))
+        precondition(engine.state.isPaused && engine.state.interruptionMessage == "Left app")
+        precondition(engine.state.elapsedMillis == beforeInterruption && signals.signals == beforeSignals)
+        let starts = runtime.starts
+        engine.resume()
+        precondition(runtime.starts == starts + 1 && engine.state.interruptionMessage == nil)
+        try await Task.sleep(for: .milliseconds(150))
+        precondition(engine.state.isRunning && engine.state.elapsedMillis > beforeInterruption)
+
+        // Invalidation can be visible before the delegate task executes.
+        runtime.canContinue = false
+        let beforeInvalidTick = signals.signals
+        try await Task.sleep(for: .milliseconds(150))
+        precondition(engine.state.isPaused && signals.signals == beforeInvalidTick)
+        engine.resume()
+        let beforeGap = engine.state.elapsedMillis
+        let beforeGapSignals = signals.signals
+        blockMainThread()
+        try await Task.sleep(for: .milliseconds(150))
+        precondition(engine.state.isPaused && engine.state.elapsedMillis == beforeGap)
+        precondition(signals.signals == beforeGapSignals, "Suspension must not replay overdue cues")
+        engine.stop()
+        runtime.interrupted?("Late callback")
+        precondition(!engine.state.isPaused && engine.state.interruptionMessage == nil)
+        print("PASS: session protection, pause/resume timing, completion, Stop/Done identity, restart, interruption, and overdue-cue suppression")
     }
+
+    private static func blockMainThread() { Thread.sleep(forTimeInterval: 2.2) }
 }

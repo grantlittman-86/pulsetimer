@@ -9,12 +9,25 @@ final class RuntimeSessionController: NSObject {
     /// Called shortly before the system ends the session. Engine wires a warning haptic here.
     var willExpire: (() -> Void)?
 
+    var interrupted: ((String) -> Void)?
+    private var stopping = false
+    private var restartRequested = false
+
+    // Also checked before each tick, since invalidation can precede its delegate task.
+    var canContinue: Bool {
+        restartRequested || (!stopping && session != nil && session?.state != .invalid)
+    }
+
     private var session: WKExtendedRuntimeSession?
 
     /// Begin an extended runtime session. Idempotent: repeated calls while a session is
     /// already running or scheduled are ignored.
     func start() {
-        if let s = session, s.state == .running || s.state == .scheduled {
+        if stopping {
+            restartRequested = true
+            return
+        }
+        if let s = session, s.state != .invalid {
             return
         }
         let new = WKExtendedRuntimeSession()
@@ -28,7 +41,10 @@ final class RuntimeSessionController: NSObject {
     /// confirms the session has fully ended; releasing it here would dealloc the
     /// object mid-invalidation and produce a "Session not running" log noise.
     func stop() {
-        session?.invalidate()
+        restartRequested = false
+        guard let session, !stopping else { return }
+        stopping = true
+        session.invalidate()
     }
 }
 
@@ -56,10 +72,28 @@ extension RuntimeSessionController: WKExtendedRuntimeSessionDelegate {
         error: Error?
     ) {
         let sessionId = ObjectIdentifier(extendedRuntimeSession)
+        let message: String
+        switch reason {
+        case .resignedFrontmost:
+            message = "You left PulseTimer. Keep it open for wrist-down cues, then tap Resume when ready."
+        case .expired:
+            message = "The watch's session time limit was reached. Tap Resume to continue."
+        default:
+            message = "The watch interrupted this session. Tap Resume to try again."
+        }
         Task { @MainActor [weak self] in
             guard let self, let current = self.session,
                   ObjectIdentifier(current) == sessionId else { return }
+            let wasStopping = self.stopping
+            let shouldRestart = self.restartRequested
             self.session = nil
+            self.stopping = false
+            self.restartRequested = false
+            if shouldRestart {
+                self.start()
+            } else if !wasStopping {
+                self.interrupted?(message)
+            }
         }
     }
 }

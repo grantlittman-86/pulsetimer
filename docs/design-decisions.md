@@ -139,4 +139,14 @@ Apple Watch hardware validation completed November 16, 2026:
 
 Runtime callbacks now check session identity before invoking expiration handling or clearing the current session, and the session reference is assigned before starting it. Earlier hardware runs delayed the second cue until wrist raise; the exact cause was not conclusively established, despite the subsequent successful runs. Continue monitoring this behavior.
 
-Known release follow-up: explicitly leaving via the Digital Crown ends the frontmost mindfulness runtime, and overdue cues can fire on reopening. User-facing guidance and interruption handling remain outstanding before the App Store update. No App Store upload has been performed for these changes.
+Explicitly leaving via the Digital Crown ends the frontmost mindfulness runtime. The interruption handling and user-facing guidance described below address the previously observed overdue cues on reopening. No App Store upload has been performed for these changes.
+
+## watchOS interrupted-session handling (November 16, 2026)
+
+Unexpected runtime invalidation now pauses an unfinished session at its last processed tick, cancels pending haptics, and shows an explanation with Resume/Stop controls. Before processing each tick, the engine also checks runtime validity; this covers invalidation before its delegate task runs. An execution gap over two seconds conservatively pauses rather than replaying overdue interval, milestone, countdown, or completion cues. Resume requests runtime support again and starts a fresh monotonic segment from the saved elapsed time. Normal wrist-down execution and in-app back navigation do not deliberately pause the session.
+
+The controller retains a stopping session until its callback and queues a requested restart, avoiding reuse of a session being invalidated. Session identity guards prevent old callbacks from affecting a newer session. Intentional Stop does not produce an interruption message.
+
+Timing guidance in the pattern list explains keeping PulseTimer current while lowering the wrist, interruption when leaving or switching apps, explicit Resume, Silent Mode, and the approximate one-hour session limit. Host checks cover interruption without time advancement or cue replay, Resume, validity checks ahead of callbacks, execution-gap handling, and ignored interruption after Stop. Host regression checks passed, and the signed development build compiled and installed successfully through Xcode.
+
+Hardware validation passed on Grant's Apple Watch with Xcode's debugger stopped: Timing guidance was reviewed; leaving via the Digital Crown paused the timer; reopening after an interval had elapsed preserved the paused position and produced no delayed haptic; Resume restored normal interval and completion cues with the wrist lowered. Grant confirmed all checks passed on November 16, 2026.

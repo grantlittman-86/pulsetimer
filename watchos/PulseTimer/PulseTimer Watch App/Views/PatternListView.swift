@@ -37,6 +37,21 @@ struct PatternListView: View {
             }
             .buttonStyle(.plain)
 
+            NavigationLink("Timing guidance") {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Keep PulseTimer open").font(.headline)
+                        Text("You can lower your wrist and let the screen sleep. Leave PulseTimer as the current app for timed haptic cues.")
+                        Text("Pressing the Digital Crown, switching apps, or another watch interruption can pause your timer. Reopen PulseTimer and tap Resume to continue from the saved position. Missed cues are not replayed.")
+                        Text("Use Silent Mode on your watch for discreet haptics. Extended sessions are limited to about one hour.")
+                    }
+                    .font(.caption)
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 12)
+                }
+                .navigationTitle("Timing guidance")
+            }
+
             ForEach(sortedPatterns) { pattern in
                 Button {
                     onPatternSelected(pattern)

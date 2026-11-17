@@ -6,6 +6,7 @@ struct TimerState: Equatable {
     var patternId: String?
     var isRunning: Bool = false
     var isPaused: Bool = false
+    var interruptionMessage: String?
     /// Total elapsed time in milliseconds (pauses excluded).
     var elapsedMillis: Int64 = 0
     /// Total duration in milliseconds, or nil if indefinite.
