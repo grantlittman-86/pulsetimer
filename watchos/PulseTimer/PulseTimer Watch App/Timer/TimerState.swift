@@ -2,6 +2,8 @@ import Foundation
 
 /// Observable state of the running timer, exposed to the UI.
 struct TimerState: Equatable {
+    /// Retained through completion until Stop or Done clears the session.
+    var patternId: String?
     var isRunning: Bool = false
     var isPaused: Bool = false
     /// Total elapsed time in milliseconds (pauses excluded).

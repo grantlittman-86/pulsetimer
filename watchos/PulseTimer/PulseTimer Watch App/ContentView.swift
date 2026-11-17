@@ -10,18 +10,29 @@ struct ContentView: View {
     @Environment(PatternRepository.self) private var repository
     @Environment(TimerEngine.self) private var engine
 
+    @State private var showActiveSessionAlert = false
     @State private var path = NavigationPath()
 
     var body: some View {
         NavigationStack(path: $path) {
             PatternListView(
                 onPatternSelected: { pattern in
+                    if let activeId = engine.state.patternId {
+                        if activeId == pattern.id {
+                            path.append(AppRoute.timer)
+                        } else {
+                            showActiveSessionAlert = true
+                        }
+                        return
+                    }
                     engine.start(pattern: pattern)
                     repository.markUsed(id: pattern.id)
                     path.append(AppRoute.timer)
                 },
+                onViewTimer: { path.append(AppRoute.timer) },
                 onCreateNew: { path.append(AppRoute.createPattern) },
                 onEditPattern: { pattern in
+                    guard engine.state.patternId != pattern.id else { return }
                     path.append(AppRoute.editPattern(patternId: pattern.id))
                 }
             )
@@ -29,14 +40,18 @@ struct ContentView: View {
                 destination(for: route)
             }
         }
+        .alert("Timer session active", isPresented: $showActiveSessionAlert) {
+            Button("View timer") { path.append(AppRoute.timer) }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Tap Stop or Done in the current timer before starting another pattern.")
+        }
     }
 
     @ViewBuilder
     private func destination(for route: AppRoute) -> some View {
         switch route {
         case .timer:
-            // TimerView dismisses itself via @Environment(\.dismiss) and stops the
-            // engine in its own .onDisappear — no closure needed here.
             TimerView()
         case .createPattern:
             PatternEditorView(
@@ -51,16 +66,18 @@ struct ContentView: View {
                 onPushMilestone: { milestoneId in path.append(milestoneId) }
             )
         case .editPattern(let id):
-            if let original = repository.getById(id) {
+            if let original = repository.getById(id), engine.state.patternId != id {
                 let working = original.isPreset ? makeCopyOfPreset(original) : original
                 PatternEditorView(
                     initialPattern: working,
                     canDelete: !original.isPreset,
                     onSave: { saved in
+                        guard engine.state.patternId != id else { return }
                         repository.save(saved)
                         popLast()
                     },
                     onDelete: {
+                        guard engine.state.patternId != id else { return }
                         repository.delete(original)
                         popLast()
                     },

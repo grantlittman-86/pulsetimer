@@ -113,3 +113,30 @@ The watch face complication shows only the app icon with no text. This matches u
 ```
 
 This JSON schema should be treated as the canonical data format. Both platforms should be able to serialize and deserialize patterns to/from this format, even if the internal storage mechanism differs. This enables potential future features like pattern import/export.
+
+
+## watchOS session navigation refinement (November 16, 2026)
+
+Returning from the timer to the pattern list now preserves the session. The list highlights its pattern and labels it Running, Paused, or Completed, with a View timer action. Tapping another pattern explains that Stop or Done is required first. The active pattern has no edit/delete swipe actions, including while paused or completed. Session identity clears on Stop/Done while final display values remain intact during dismissal.
+
+Elapsed time uses ContinuousClock with a fixed anchor for each running segment. Pausing captures elapsed time up to the pause action, and paused time is excluded on resume. Wall-clock timestamps remain only for signal flash notifications. Existing watchOS completion behavior is retained: a single completion pulse, the manual Done tap target, TimelineView refresh, and a ten-second completion auto-dismiss while the timer screen is visible. Back navigation does not stop the runtime session.
+
+The nonfunctional Audio toggle was removed from the watchOS pattern editor. Existing audioEnabled values remain in stored patterns for schema compatibility. No independent audio playback was added; Apple Watch Silent Mode continues to control the sound paired with system haptics.
+
+Host-side engine regression checks: `bash watchos/tests/run-timer-checks.sh`. These use the production engine and models with WatchKit service doubles. Checks passed for session replacement protection, pause exclusion, resume, completion protection, Stop identity clearing, and restart. An unsigned Release build for generic watchOS and signed development builds installed through Xcode succeeded. Swift macro subprocesses required `-disable-sandbox` when running checks inside the existing execution sandbox; no project build settings were changed for this.
+
+The timer layout places the pattern name in the system navigation title, includes scrollable content with bottom spacing, and uses compact equal-width controls with single-line labels. View timer also appears within the highlighted pattern row so it remains discoverable when the list restores its scroll position.
+
+Apple Watch hardware validation completed November 16, 2026:
+- Returning to the list preserved the running timer, and View timer reopened it without resetting.
+- Selecting another pattern showed the active-session safeguard.
+- Pause remained stable through navigation.
+- Navigation title, button bounds, single-line Resume, and active-row View timer passed visual checks.
+- Edit/delete actions were unavailable for the active pattern while running or paused, and returned for the custom pattern after Stop.
+- Immediate Done and ten-second automatic completion dismissal both passed.
+- Two three-minute wrist-down runs with temporary diagnostics delivered both minute cues and completion on time, including after an immediate Stop/restart, with no execution-gap messages.
+- After removing all temporary diagnostic UI and state, a final standalone wrist-down run delivered minute-one, minute-two, and completion cues on time. Grant confirmed the diagnostics were gone. Xcode's debugger was stopped for this test.
+
+Runtime callbacks now check session identity before invoking expiration handling or clearing the current session, and the session reference is assigned before starting it. Earlier hardware runs delayed the second cue until wrist raise; the exact cause was not conclusively established, despite the subsequent successful runs. Continue monitoring this behavior.
+
+Known release follow-up: explicitly leaving via the Digital Crown ends the frontmost mindfulness runtime, and overdue cues can fire on reopening. User-facing guidance and interruption handling remain outstanding before the App Store update. No App Store upload has been performed for these changes.

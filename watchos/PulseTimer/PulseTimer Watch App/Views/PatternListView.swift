@@ -4,7 +4,9 @@ import SwiftUI
 /// Sorted: most recently used first, then presets, then alphabetical.
 struct PatternListView: View {
     @Environment(PatternRepository.self) private var repository
+    @Environment(TimerEngine.self) private var engine
     let onPatternSelected: (Pattern) -> Void
+    let onViewTimer: () -> Void
     let onCreateNew: () -> Void
     let onEditPattern: (Pattern) -> Void
 
@@ -20,6 +22,11 @@ struct PatternListView: View {
 
     var body: some View {
         List {
+            if engine.state.patternId != nil {
+                Button(action: onViewTimer) {
+                    Label("View timer", systemImage: "timer")
+                }
+            }
             Button(action: onCreateNew) {
                 HStack {
                     Image(systemName: "plus.circle")
@@ -34,32 +41,44 @@ struct PatternListView: View {
                 Button {
                     onPatternSelected(pattern)
                 } label: {
-                    PatternRow(pattern: pattern)
+                    PatternRow(pattern: pattern, sessionStatus: sessionStatus(for: pattern))
                 }
                 .buttonStyle(.plain)
+                .listRowBackground(engine.state.patternId == pattern.id
+                    ? Color.accentColor.opacity(0.2) : Color.clear)
                 .swipeActions(edge: .trailing) {
-                    if !pattern.isPreset {
-                        Button(role: .destructive) {
-                            repository.delete(pattern)
-                        } label: {
-                            Label("Delete", systemImage: "trash")
+                    if engine.state.patternId != pattern.id {
+                        if !pattern.isPreset {
+                            Button(role: .destructive) {
+                                guard engine.state.patternId != pattern.id else { return }
+                                repository.delete(pattern)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
+                        Button {
+                            onEditPattern(pattern)
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        .tint(.blue)
                     }
-                    Button {
-                        onEditPattern(pattern)
-                    } label: {
-                        Label("Edit", systemImage: "pencil")
-                    }
-                    .tint(.blue)
                 }
             }
         }
         .navigationTitle("PulseTimer")
     }
+
+    private func sessionStatus(for pattern: Pattern) -> String? {
+        guard engine.state.patternId == pattern.id else { return nil }
+        if engine.state.isFinished { return "Completed" }
+        return engine.state.isPaused ? "Paused" : "Running"
+    }
 }
 
 private struct PatternRow: View {
     let pattern: Pattern
+    let sessionStatus: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -73,6 +92,14 @@ private struct PatternRow: View {
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                 }
+            }
+            if let sessionStatus {
+                Text(sessionStatus)
+                    .font(.caption2.bold())
+                    .foregroundStyle(Color.accentColor)
+                Label("View timer", systemImage: "timer")
+                    .font(.caption2)
+                    .foregroundStyle(.primary)
             }
             Text(summary(for: pattern))
                 .font(.caption2)

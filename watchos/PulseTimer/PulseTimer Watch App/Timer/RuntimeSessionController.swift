@@ -1,14 +1,9 @@
 import Foundation
 import WatchKit
 
-/// Manages a `WKExtendedRuntimeSession` so the timer can keep ticking when the wrist
-/// is down or the user navigates away. This is the watchOS analog of the Wear OS
-/// foreground service: without it, watchOS suspends the app aggressively after a
-/// few seconds of inactivity and the timer dies.
-///
-/// The system caps extended runtime at roughly 30 minutes for most session contexts.
-/// `willExpire` warns us before the session ends; we surface that to the engine so
-/// the user gets a final haptic warning rather than silent failure.
+/// Keeps a mindfulness session frontmost while the wrist is down, for up to one hour.
+/// Explicitly leaving the app can invalidate this session. This is not a general
+/// background service. Delegate callbacks are scoped to the current session.
 @MainActor
 final class RuntimeSessionController: NSObject {
     /// Called shortly before the system ends the session. Engine wires a warning haptic here.
@@ -24,8 +19,8 @@ final class RuntimeSessionController: NSObject {
         }
         let new = WKExtendedRuntimeSession()
         new.delegate = self
-        new.start()
         self.session = new
+        new.start()
     }
 
     /// End the current session (if any). Safe to call when no session is active.
@@ -41,14 +36,17 @@ extension RuntimeSessionController: WKExtendedRuntimeSessionDelegate {
     nonisolated func extendedRuntimeSessionDidStart(
         _ extendedRuntimeSession: WKExtendedRuntimeSession
     ) {
-        // No-op. The system surfaces a small status indicator on the watch face.
+        // No additional action is needed once WatchKit starts the session.
     }
 
     nonisolated func extendedRuntimeSessionWillExpire(
         _ extendedRuntimeSession: WKExtendedRuntimeSession
     ) {
+        let sessionId = ObjectIdentifier(extendedRuntimeSession)
         Task { @MainActor [weak self] in
-            self?.willExpire?()
+            guard let self, let current = self.session,
+                  ObjectIdentifier(current) == sessionId else { return }
+            self.willExpire?()
         }
     }
 
@@ -57,8 +55,11 @@ extension RuntimeSessionController: WKExtendedRuntimeSessionDelegate {
         didInvalidateWith reason: WKExtendedRuntimeSessionInvalidationReason,
         error: Error?
     ) {
+        let sessionId = ObjectIdentifier(extendedRuntimeSession)
         Task { @MainActor [weak self] in
-            self?.session = nil
+            guard let self, let current = self.session,
+                  ObjectIdentifier(current) == sessionId else { return }
+            self.session = nil
         }
     }
 }

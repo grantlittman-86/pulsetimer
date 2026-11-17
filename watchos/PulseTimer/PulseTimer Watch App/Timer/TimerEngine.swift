@@ -22,6 +22,8 @@ final class TimerEngine {
     private let runtimeController = RuntimeSessionController()
     private var tickTask: Task<Void, Never>?
     private var pattern: Pattern?
+    private var segmentStartedAt: ContinuousClock.Instant?
+    private var segmentElapsedMillis: Int64 = 0
 
     private var lastIntervalFiredAt: Int64 = 0
     private var firedMilestoneTriggers: Set<Int64> = []
@@ -42,12 +44,14 @@ final class TimerEngine {
     }
 
     func start(pattern: Pattern) {
+        guard state.patternId == nil else { return }
         self.pattern = pattern
         lastIntervalFiredAt = 0
         firedMilestoneTriggers.removeAll()
         lastCountdownFiredAt = 0
 
         var newState = TimerState()
+        newState.patternId = pattern.id
         newState.isRunning = true
         newState.elapsedMillis = 0
         newState.totalDurationMillis = pattern.totalDurationMillis
@@ -60,6 +64,11 @@ final class TimerEngine {
     }
 
     func pause() {
+        guard state.isRunning else { return }
+        updateElapsedTime()
+        guard state.isRunning else { return }
+        segmentStartedAt = nil
+        signalExecutor.cancel()
         tickTask?.cancel()
         tickTask = nil
         state.isRunning = false
@@ -67,6 +76,7 @@ final class TimerEngine {
     }
 
     func resume() {
+        guard state.isPaused, state.patternId != nil else { return }
         state.isRunning = true
         state.isPaused = false
         startTicking()
@@ -80,14 +90,17 @@ final class TimerEngine {
         signalExecutor.cancel()
         runtimeController.stop()
         pattern = nil
+        segmentStartedAt = nil
+        state.patternId = nil
         state.isRunning = false
         state.isPaused = false
     }
 
     private func startTicking() {
         tickTask?.cancel()
+        segmentStartedAt = ContinuousClock.now
+        segmentElapsedMillis = state.elapsedMillis
         tickTask = Task { @MainActor [weak self] in
-            var lastTickTime = Self.nowMillis()
             while !Task.isCancelled {
                 guard let self else { return }
                 let intervalMs = self.isAmbient ? Self.tickSlowMs : Self.tickFastMs
@@ -96,12 +109,19 @@ final class TimerEngine {
                 } catch {
                     return
                 }
-                let now = Self.nowMillis()
-                let delta = now - lastTickTime
-                lastTickTime = now
-                self.tick(delta: delta)
+                guard !Task.isCancelled else { return }
+                self.updateElapsedTime()
             }
         }
+    }
+
+    private func updateElapsedTime() {
+        guard state.isRunning, let start = segmentStartedAt else { return }
+        let duration = start.duration(to: ContinuousClock.now).components
+        // Measure from a fixed anchor so fractional milliseconds do not drift.
+        let elapsed = duration.seconds * 1_000 + duration.attoseconds / 1_000_000_000_000_000
+        let delta = max(0, segmentElapsedMillis + elapsed - state.elapsedMillis)
+        tick(delta: delta)
     }
 
     private func tick(delta: Int64) {

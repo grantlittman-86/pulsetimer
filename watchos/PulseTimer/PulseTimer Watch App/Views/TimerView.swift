@@ -5,9 +5,8 @@ import SwiftUI
 /// Adapts to always-on display via `\.isLuminanceReduced` rather than maintaining
 /// two separate layouts: dimmer colors and hidden controls when the wrist is down.
 ///
-/// Navigation: uses SwiftUI's `\.dismiss` environment primitive. Engine lifecycle is
-/// managed via `.onDisappear` so it runs regardless of how the user leaves the timer
-/// screen — Done, Stop, swipe-back, or auto-dismiss all converge.
+/// Back navigation preserves the session. Stop, Done, and completion auto-dismiss
+/// explicitly end it while retaining the hardware-tested Done interaction.
 ///
 /// Why the TimelineView wrapping the content: SwiftUI's hit-testing on watchOS becomes
 /// unreliable when the view stops re-rendering. During an active timer, `elapsedMillis`
@@ -36,9 +35,13 @@ struct TimerView: View {
                 .allowsHitTesting(false)
             // Periodic re-render keeps the view "warm" so taps register reliably.
             TimelineView(.periodic(from: .now, by: 0.1)) { _ in
-                content
+                ScrollView {
+                    content
+                }
             }
         }
+        .navigationTitle(engine.state.patternName)
+        .navigationBarTitleDisplayMode(.inline)
         .onChange(of: engine.state.lastSignalFiredAt) { _, newValue in
             triggerFlash(if: newValue)
         }
@@ -46,13 +49,15 @@ struct TimerView: View {
             if engine.state.isFinished {
                 try? await Task.sleep(for: .seconds(Self.autoDismissAfterCompletionSec))
                 if !Task.isCancelled {
-                    dismiss()
+                    stopAndDismiss()
                 }
             }
         }
-        .onDisappear {
-            engine.stop()
-        }
+    }
+
+    private func stopAndDismiss() {
+        engine.stop()
+        dismiss()
     }
 
     private var flashBackground: some View {
@@ -72,11 +77,6 @@ struct TimerView: View {
     private var content: some View {
         let state = engine.state
         return VStack(spacing: 4) {
-            Text(state.patternName)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-
             timeDisplay(state)
 
             if let total = state.totalDurationMillis, total > 0, !state.isFinished {
@@ -97,7 +97,9 @@ struct TimerView: View {
             controls(state)
                 .padding(.top, 4)
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 8)
+        .padding(.top, 4)
+        .padding(.bottom, 12)
     }
 
     @ViewBuilder
@@ -110,21 +112,21 @@ struct TimerView: View {
 
         if displayFinished, let total = state.totalDurationMillis {
             Text(formatTime(millis: total))
-                .font(.system(size: 38, weight: .bold, design: .rounded))
+                .font(.system(size: 34, weight: .bold, design: .rounded))
                 .foregroundStyle(timeColor)
             Text("completed")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         } else if let _ = state.totalDurationMillis {
             Text(formatTime(millis: state.remainingMillis ?? 0))
-                .font(.system(size: 38, weight: .bold, design: .rounded))
+                .font(.system(size: 34, weight: .bold, design: .rounded))
                 .foregroundStyle(timeColor)
             Text("remaining")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         } else {
             Text(formatTime(millis: state.elapsedMillis))
-                .font(.system(size: 38, weight: .bold, design: .rounded))
+                .font(.system(size: 34, weight: .bold, design: .rounded))
                 .foregroundStyle(timeColor)
             Text("elapsed")
                 .font(.caption2)
@@ -168,37 +170,49 @@ struct TimerView: View {
                         }
                         .contentShape(.rect)
                         .onTapGesture {
-                            dismiss()
+                            stopAndDismiss()
                         }
                 } else if state.isPaused {
                     Button {
                         engine.resume()
                     } label: {
-                        Text("Resume").frame(maxWidth: .infinity)
+                        controlLabel("Resume", color: .accentColor)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.plain)
                     Button {
-                        dismiss()
+                        stopAndDismiss()
                     } label: {
-                        Text("Stop").frame(maxWidth: .infinity)
+                        controlLabel("Stop", color: .red)
                     }
-                    .tint(.red)
+                    .buttonStyle(.plain)
                 } else if state.isRunning {
                     Button {
                         engine.pause()
                     } label: {
-                        Text("Pause").frame(maxWidth: .infinity)
+                        controlLabel("Pause", color: .accentColor)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.plain)
                     Button {
-                        dismiss()
+                        stopAndDismiss()
                     } label: {
-                        Text("Stop").frame(maxWidth: .infinity)
+                        controlLabel("Stop", color: .red)
                     }
-                    .tint(.red)
+                    .buttonStyle(.plain)
                 }
             }
         }
+    }
+
+    private func controlLabel(_ title: String, color: Color) -> some View {
+        Text(title)
+            .font(.system(size: 15, weight: .semibold))
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            .frame(maxWidth: .infinity)
+            .frame(height: 36)
+            .foregroundStyle(.white)
+            .background(color, in: RoundedRectangle(cornerRadius: 10))
+            .contentShape(.rect)
     }
 
     private func triggerFlash(if signalAt: Int64) {

@@ -31,7 +31,6 @@ struct PatternEditorView: View {
     @State private var countdownActivateAtMillis: Int64
     @State private var countdownIntervalMillis: Int64
     @State private var countdownHaptic: HapticType
-    @State private var audioEnabled: Bool
 
     init(initialPattern: Pattern,
          canDelete: Bool,
@@ -56,7 +55,6 @@ struct PatternEditorView: View {
         _countdownActivateAtMillis = State(initialValue: initialPattern.countdownWarning?.activateAtMillis ?? 60_000)
         _countdownIntervalMillis = State(initialValue: initialPattern.countdownWarning?.intervalMillis ?? 10_000)
         _countdownHaptic = State(initialValue: initialPattern.countdownWarning?.signal.hapticType ?? .tap)
-        _audioEnabled = State(initialValue: initialPattern.audioEnabled)
     }
 
     var body: some View {
@@ -140,10 +138,6 @@ struct PatternEditorView: View {
                 }
             }
 
-            Section("Audio") {
-                Toggle("Enabled", isOn: $audioEnabled)
-            }
-
             Section {
                 Button("Save", action: saveAndDismiss)
                 Button("Cancel", action: onCancel)
@@ -174,7 +168,6 @@ struct PatternEditorView: View {
             intervalMillis: countdownIntervalMillis,
             signal: Signal(hapticType: countdownHaptic)
         ) : nil
-        saved.audioEnabled = audioEnabled
         onSave(saved)
     }
 }
